@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothes</title>
+    <link rel="stylesheet" href="Exam2.css">
+</head>
+
+<body>
+    <h1>New Product</h1>
+    <hr/>
+
+    <div class="section">
+        <form id="frm">
+            <p>
+                <label>
+                        Product Name </br>
+                        <input type="text" name="pname" id="pname">
+                    </label>
+            </p>
+            <p>
+                <label>
+                        Product Quantity </br>
+                        <input type="text" name="qty" id="qty">
+                    </label>
+            </p>
+            <p>
+                <label>
+                        Product Price </br>
+                        <input type="text" name="pri" id="pri">
+                    </label>
+            </p>
+            <p>
+                <button type="button" onclick="add()">Add</button>
+
+            </p>
+        </form>
+        <table id="tb">
+            <thead id="thead">
+                <div class="tb1">
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </div>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="total">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <script>
+            let count = 0;
+            let total = 0;
+
+            function add() {
+                const pname = document.getElementById('pname').value;
+                const qty = document.getElementById('qty').value;
+                const pri = document.getElementById('pri').value;
+
+                if (pname && qty && pri) {
+                    count++;
+                    const subtotal = qty * pri;
+                    total += subtotal;
+
+                    const tbody = document.getElementById('tbody');
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${count}</td>
+                        <td>${pname}</td>
+                        <td>${qty}</td>
+                        <td>${pri}</td>
+                        <td>${subtotal}</td>
+                    `;
+
+                    tbody.insertBefore(row, tbody.lastElementChild);
+                    document.getElementById('total').innerText = total;
+
+                    // Clear input fields
+                    document.getElementById('pname').value = '';
+                    document.getElementById('qty').value = '';
+                    document.getElementById('pri').value = '';
+                } else {
+                    alert('Please fill in all fields');
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>

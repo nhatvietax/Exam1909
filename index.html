@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script scr="./js/bootstrap.min.js"></script>
+    <script scr="./js/jquenry.min.js"></script>
+    <script scr="script.js"></script>
+</head>
+
+<body>
+    <div class="body">
+        Customer Name : </br>
+        <input type="text" id="name">
+        <br> ID:</br>
+        <input type="text" id="id">
+        <br> Product Name :</br>
+        <input type="text" id="prdname">
+        <br> Quantity :</br>
+        <input type="text" id="qty">
+        <br>Price :</br>
+        <input type="text" id="price">
+        <br>
+        <input type="button" value="Save" onclick="save()">
+        <input type="button" value="Show" onclick="show()">
+        <input type="button" value="Reset" onclick="reset()">
+        <table class="table">
+            <thread class="thead-dark">
+                <tr>
+                    <th>Auto increment</th>
+                    <th>Customer Name</th>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thread>
+            <tbody id="tbd"></tbody>
+        </table>
+    </div>
+    <script>
+        var arr = [];
+
+        function save() {
+            var a = {
+                name: document.getElementById('name').value,
+                id: document.getElementById('id').value,
+                prdname: document.getElementById('prdname').value,
+                qty: document.getElementById('qty').value,
+                price: document.getElementById('price').value,
+            }
+            console.log(a);
+            arr.push(a);
+        }
+
+        function show() {
+            var html = '';
+            for (var i = 0; i < arr.length; i++) {
+                var n = i + 1;
+                html += "<tr>";
+                html += "<td>" + n + "</td>";
+                html += "<td>" + arr[i].name + "</td>";
+                html += "<td>" + arr[i].id + "</td>";
+                html += "<td>" + arr[i].prdname + "</td>";
+                html += "<td>" + arr[i].qty + "</td>";
+                html += "<td>" + arr[i].price + "</td>";
+                html += "<td>" + (parseFloat(arr[i].qty) * parseFloat(arr[i].price)).toFixed(2) + "</td>";
+                html += "</tr>";
+
+
+            }
+            document.getElementById('tbd').innerHTML = html;
+        }
+
+        function reset() {
+            document.getElementById('name').value = '';
+            document.getElementById('id').value = '';
+            document.getElementById('prdname').value = '';
+            document.getElementById('qty').value = '';
+            document.getElementById('price').value = '';
+        }
+    </script>
+</body>
+
+</html>
